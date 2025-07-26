@@ -29,7 +29,6 @@ class ProductController extends Controller
 
     public function show(Product $product)
 {
-    // Produits similaires (même catégorie, exclure le produit actuel)
     $relatedProducts = Product::where('category_id', $product->category_id)
                               ->where('id', '!=', $product->id)
                               ->limit(4)

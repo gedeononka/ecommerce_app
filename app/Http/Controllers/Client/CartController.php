@@ -12,7 +12,6 @@ class CartController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // Récupère les articles du panier de l'utilisateur avec les produits liés
         $cartItems = CartItem::with('product')
             ->where('user_id', $user->id)
             ->get();
@@ -27,17 +26,14 @@ class CartController extends Controller
 
         $quantity = $request->quantity ?? 1;
 
-        // Cherche si le produit est déjà dans le panier de l'utilisateur
         $cartItem = CartItem::where('user_id', $user->id)
                             ->where('product_id', $productId)
                             ->first();
 
         if ($cartItem) {
-            // Incrémente la quantité
             $cartItem->quantity += $quantity;
             $cartItem->save();
         } else {
-            // Crée un nouvel item dans le panier
             CartItem::create([
                 'user_id' => $user->id,
                 'product_id' => $productId,

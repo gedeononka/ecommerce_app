@@ -21,20 +21,18 @@ class OrderController extends Controller
 public function index(Request $request)
 {
     $query = Order::with('items.product')
-        ->where('user_id', Auth::id()); // <-- filtre les commandes du client connecté
+        ->where('user_id', Auth::id()); 
 
-    // Filtrer par statut
     if ($request->filled('status')) {
         $query->where('status', $request->status);
     }
 
-    // Filtrer par période (en jours)
     if ($request->filled('period')) {
         $days = (int) $request->period;
         $query->where('created_at', '>=', Carbon::now()->subDays($days));
     }
 
-    $orders = $query->latest()->paginate(10)->withQueryString(); // important pour garder les filtres dans la pagination
+    $orders = $query->latest()->paginate(10)->withQueryString(); 
 
     return view('client.orders.index', compact('orders'));
 }
@@ -100,12 +98,10 @@ public function store(Request $request)
             ]);
         }
 
-        // Vider le panier
         CartItem::where('user_id', $user->id)->delete();
 
         DB::commit();
 
-        // ✅ Envoyer une notification de confirmation de commande
         $user->notify(new OrderCreated($order));
 
         return redirect()->route('orders.show', $order->id)
@@ -124,13 +120,10 @@ public function store(Request $request)
 }
  public function invoice(Order $order)
 {
-    // Charge les relations nécessaires
     $order->load('items.product', 'user');
 
-    // Génère le PDF à partir de la vue 'client.orders.invoice' avec les données $order
     $pdf = pdf::loadView('client.orders.invoice', compact('order'));
 
-    // Retourne le PDF en téléchargement avec un nom de fichier personnalisé
     return $pdf->download("facture_commande_{$order->id}.pdf");
 }
 public function update(Request $request, Order $order)
@@ -139,10 +132,8 @@ public function update(Request $request, Order $order)
     $order->payment_status = $request->payment_status;
     $order->save();
 
-    // Notification pour le statut
     $order->user->notify(new OrderStatusUpdated($order));
 
-    // Notification si paiement confirmé
     if ($order->payment_status === 'payé') {
         $order->user->notify(new PaymentConfirmed($order));
     }
@@ -151,23 +142,18 @@ public function update(Request $request, Order $order)
 }
 public function cancel(Order $order)
 {
-    // Vérifie que l'utilisateur connecté est bien le propriétaire de la commande
     if ($order->user_id !== auth()->id()) {
         abort(403, 'Action non autorisée.');
     }
 
-    // Autorise uniquement l'annulation si la commande est "en attente"
     if ($order->status !== 'en attente') {
         return redirect()->back()->with('error', 'Seules les commandes en attente peuvent être annulées.');
     }
 
-    // Supprime les articles liés à la commande (order_items)
     $order->items()->delete();
 
-    // Supprime la commande elle-même
     $order->delete();
 
-    // Redirige vers la liste des commandes avec un message de succès
     return redirect()->route('orders.index')->with('success', 'Commande supprimée avec succès.');
 }
 
@@ -198,7 +184,6 @@ public function reorder(Order $order)
 
         DB::commit();
 
-        // Notification de nouvelle commande
         $order->user->notify(new OrderCreated($newOrder));
 
         return redirect()->route('orders.show', $newOrder)->with('success', 'Commande repassée avec succès.');

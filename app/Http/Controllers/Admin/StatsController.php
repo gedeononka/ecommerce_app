@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;

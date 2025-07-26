@@ -19,7 +19,7 @@
     @endif
 
     <div class="mb-4">
-        <strong>Prix :</strong> {{ $product->price }} €
+        <strong>Prix :</strong> {{ $product->price }} FCFA
     </div>
 
     <div class="mb-4">
