@@ -8,14 +8,13 @@
 </p>
 <h2>ecommerce_app</h2> 
 <p>Instruction: How to launch the app,follow these steps:</p>
-<ul>
+<ol type='1'>
     <li>create database called `ecommerce`;</li>
-    <li>php artisan migrate;</li>
     <li>php artisan migrate;</li>
     <li>php artisan db:seed RoleSeeder --class;</li>
     <li>php artisan db:seed;</li>
     <li>php artisan serve;</li>
-</ul>
+</ol>
 
 <footer> &copy;Made by Gedeon Love</footer>
 
