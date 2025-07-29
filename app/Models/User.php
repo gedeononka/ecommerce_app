@@ -7,10 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles,HasApiTokens;
 
     protected $fillable = [
         'name',
@@ -36,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+    public function cartItems()
+{
+    return $this->hasMany(\App\Models\CartItem::class);
+}
+
 }
