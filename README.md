@@ -18,13 +18,6 @@
 </ul>
 
 <footer> &copy;Made by Gedeon Love</footer>
-<style>
-    ul li {
-         text-align:center;        
-        }
-    h2 {
-        text-align:center;
-        }
-</style>
+
 
 
