@@ -6,10 +6,25 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-# ecommerce_app
-Instruction: "How to launch the app" follow these steps:
-create database called `ecommerce`;
-php artisan migrate;
-php artisan db:seed RoleSeeder --class;
-php artisan db:seed;
-php artisan serve;
+<h2>ecommerce_app</h2> 
+<p>Instruction: How to launch the app,follow these steps:</p>
+<ul>
+    <li>create database called `ecommerce`;</li>
+    <li>php artisan migrate;</li>
+    <li>php artisan migrate;</li>
+    <li>php artisan db:seed RoleSeeder --class;</li>
+    <li>php artisan db:seed;</li>
+    <li>php artisan serve;</li>
+</ul>
+
+<footer> &copy;Made by Gedeon Love</footer>
+<style>
+    ul li {
+         text-align:center;        
+        }
+    h2 {
+        text-align:center;
+        }
+</style>
+
+
