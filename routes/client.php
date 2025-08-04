@@ -6,6 +6,10 @@ use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\OrderController;
 
 
+Route::post('/checkout', [OrderController::class, 'stripeCheckout'])->name('stripe.checkout');
+Route::get('/checkout/success', [OrderController::class, 'checkoutSuccess'])->name('checkout.success');
+Route::get('/checkout/cancel', [OrderController::class, 'checkoutCancel'])->name('checkout.cancel');
+
     
 // Afficher la liste des produits (GET /client/products)
 Route::get('client/products', [ProductController::class, 'index'])->name('products.index');
