@@ -1,24 +1,58 @@
+# ========================================
+# Logs & system files 
 *.log
 .DS_Store
+Thumbs.db
+
+# ========================================
+# Laravel environment files
 .env
-.env.backup
-.env.production
-.phpactor.json
+.env.*
+!.env.example
+
+# ========================================
+# Laravel caches & compiled files
 .phpunit.result.cache
-/.fleet
-/.idea
-/.nova
+.phpactor.json
 /.phpunit.cache
+
+# ========================================
+# IDE & editor folders
 /.vscode
+/.idea
+/.fleet
 /.zed
-/auth.json
+
+# ========================================
+# Laravel Nova (if used)
+/.nova
+
+# ========================================
+# Composer auth
+auth.json
+
+# ========================================
+# Node & NPM
 /node_modules
-/public/build
 /public/hot
-/public/storage
+/public/build
+# ❗ Attention : Railway ne compile pas automatiquement les assets
+# Pense à faire : npm install && npm run build && git add public/build -f
+
+# ========================================
+# Laravel storage (except public storage symlink)
 /storage/*.key
 /storage/pail
-/vendor
-Homestead.json
+# Ne PAS ignorer "storage/app/public" car les images sont là
+!/storage/app/public
+/public/storage
+# ⚠️ /public/storage est un symlink => on ne le versionne PAS
+
+# ========================================
+# Vendors (composer)
+vendor/
+
+# ========================================
+# Homestead (if used)
 Homestead.yaml
-Thumbs.db
+Homestead.json
