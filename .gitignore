@@ -35,7 +35,7 @@ auth.json
 # Node & NPM
 /node_modules
 /public/hot
-/public/build
+
 # ❗ Attention : Railway ne compile pas automatiquement les assets
 # Pense à faire : npm install && npm run build && git add public/build -f
 
